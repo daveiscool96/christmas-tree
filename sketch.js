@@ -1,5 +1,12 @@
 let theTree;
 let theOrnaments = [];
+let rock;
+let daveRockLength = 75;
+
+function preload() {
+  rock = loadImage("rock.png");
+}
+
 
 function setup() {
   createCanvas(1280, 900);
@@ -8,6 +15,10 @@ function setup() {
   //schellenberg's ornament
   let schellenbergOrnament = new danOrnament(width/2, height/2);
   theOrnaments.push(schellenbergOrnament);
+
+  let hutchesonOrnament = new daveOrnament(width/2 - 150, height/2 -20);
+  theOrnaments.push(hutchesonOrnament);
+
 
   //add yours here!  should something like:
   // let hladyOrnament = new willOrnament(width/2, height/2);
@@ -71,6 +82,25 @@ class danOrnament extends Ornament {
     super(x, y, "blue", 30, 30);
   }
   
+  update() {
+    if (random(100) < 50) {
+      this.width++;
+      this.height++;
+    }
+    else {
+      this.width--;
+      this.height--;
+    }
+  }
+}
+
+class daveOrnament extends Ornament {
+  constructor(x, y) {
+    super(x, y, "blue", daveRockLength, daveRockLength);
+  }
+  display() {
+    image(rock, this.x, this.y, this.width, this.height);
+  }
   update() {
     if (random(100) < 50) {
       this.width++;
